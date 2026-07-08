@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>ASCII-Art Generator</title>
+</head>
+<body>
+    <form action="/ascii-art" method="post">
+        <label for="text">Enter text...</label>
+        <input type="text" name="text" id="text" required value="{{.InputText}}">
+        <label for="banner">Select banner</label>
+        <select name="banner" id="banner">
+            <option value="standard"{{if eq .BannerStyle "standard" }}selecteed {{end}}>standard</option>
+            <option value="shadow"{{ if eq .BannerStyle "shadow" }} selected {{end}}>shadow</option>
+            <option value="thinkertoy"{{if eq .BannerStyle "thinkertoy" }}{{end}}>thinkertoy</option>        </select>
+        <button type="submit">Generate</button> 
+        <button type="submit" formaction="/download">Download</button>
+    </form>
+{{if .ErrorMsg}} <p class="error">Error: {{.ErrorMsg}}</p>{{end}}
+
+{{if .ASCIIart}} <h2>your output</h2>
+<pre>{{.ASCIIart}}</pre> {{end}}
+</body>
+</html>
